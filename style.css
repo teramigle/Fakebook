@@ -1,0 +1,20 @@
+body {
+    height: 91vh;
+    background-color: white;
+    background-image: url("wojak.jpg"); 
+    background-size: 5rem;
+    
+    /* background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: auto; */
+}
+
+.header {
+    font-size: 5rem;
+    text-shadow: 0px 0px 3px black;
+}
+
+.sub-header {
+    font-size: 2rem;
+    text-shadow: 0px 0px 3px black;
+}

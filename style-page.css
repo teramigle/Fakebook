@@ -1,0 +1,16 @@
+body {
+    
+    height: 91vh;
+    /* width: 100vw; */
+    background-color: white;
+    background-image: url("wojak2.jpg"); 
+    background-size: 5rem;
+    
+}
+
+
+img {
+    border-radius: 50%;
+    width: 100px;
+  height: 100px;
+  }

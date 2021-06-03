@@ -3,6 +3,11 @@ session_start();
 if(@$_SESSION['user']){
     header('Location: page.php');
 }
+if(@$_SESSION['message']){ //zinute apie nepavykusi prisijungima arba prisijungima prie duomenu bazes
+    echo '<div class="alert alert-warning alert-dismissible text-center position-absolute top-0 start-50 translate-middle-x fade show" role="alert">'.$_SESSION['message'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+    
+}
+unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl jos neberodytu
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +19,7 @@ if(@$_SESSION['user']){
     <title>Fakebook</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="wojak.jpg">
 </head>
 <body>
     <div class="row h-100 w-100 align-items-center justify-content-center">
@@ -31,17 +37,18 @@ if(@$_SESSION['user']){
                         <input class="d-block p-1 m-1" type="text" name="username" placeholder="Vartotojo vardas" required>
                         <input class="d-block p-1 m-1" type="password" name="password" placeholder="Slaptažodis" required>
                         <input class="btn btn-outline-secondary m-1" type="submit" name="submit" value="Prisijungti">
-                        <?php
+                        <!-- <?php
                             if(@$_SESSION['message']){ //zinute apie nepavykusi prisijungima arba prisijungima prie duomenu bazes
                                 echo '<p>'.$_SESSION['message'].'</p>';
                                 
                             }
                             unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl jos neberodytu
-                        ?>
+                        ?> -->
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>

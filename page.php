@@ -18,7 +18,7 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior:auto;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,15 +35,22 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
 </head>
 <body>
 
-<a href='logout.php' id='top'><button class="btn btn-secondary m-1 mb-4" id="logout">Atsijungti</button></a>
-    <div class="row w-100">
-        <div class="offset-2 col-md-8">
+<div class="d-flex justify-content-between flex-row m-2 mb-3">
+    <a href='logout.php' id='top'><button class="btn btn-secondary" id="logout">Atsijungti</button></a>
+    <div id="search" class="input-group h-50 w-auto">
+        <input type="search" class="form-control rounded pe-0" placeholder="Vartotojas/įrašas" aria-label="Paieška"
+            aria-describedby="search-addon" />
+        <button type="button" class="btn btn-secondary">Ieškoti</button>
+    </div>
+</div>
+    <div class="row w-100 m-0">
+        <div class="offset-1 col-10 offset-md-2 col-md-8">
             <div class="card ">
                 <div class="card-body d-flex flex-row">
             
                     <img class="me-3" src="<?php echo $_SESSION['user']['picture'];?>">
                     <form class="flex-fill" method="POST" action="post.php">
-                        <textarea class="w-100 p-1 mb-2" rows="3" name="content" placeholder="Ką norite pasakyti, <?php echo $_SESSION['user']['username'];?>?" required></textarea>
+                        <textarea class="w-100 p-1 mb-2" rows="3" name="content" placeholder="Ką pasakysite, <?php echo $_SESSION['user']['username'];?>?" required></textarea>
                         <input class="btn btn-outline-secondary" type="submit" name="post" value="Paskelbti">
                     </form>
                 </div>
@@ -62,16 +69,17 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
                 // echo "<tr>";
                 while($newArray3 = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                     $post_id = $newArray3['id'];
+                    echo "<div class='post'>";
                     echo "<div class='card mt-3' id=".$post_id.">";
                     echo "<div class='card-body d-flex flex-column'>";
                     
                     echo "<div class='d-flex flex-row justify-content-between'>";
-                    echo "<h6>".$username = $newArray3['username']."</h6>";
-                    echo "<p>".$post_date = $newArray3['post_date']."</p>";
+                    echo "<h5>".$username = $newArray3['username']."</h5>";
+                    echo "<p class='text-end'>".$post_date = $newArray3['post_date']."</p>";
                     echo "</div>";
-                    echo "<div class='d-flex flex-row'>";
+                    echo "<div class='d-flex flex-row mb-2'>";
                     echo "<img src='".$picture=$newArray3['picture']."'>";
-                    echo "<p class='mx-3 w-100' name='content' rows='5'>".$content = $newArray3['content']."</p>";
+                    echo "<p class='mx-3 w-100' name='content' rows='5' style='line-break: anywhere;'>".$content = $newArray3['content']."</p>";
                     echo "<input type='hidden' name='id' value='$post_id'>";
                     echo "</div>";
                     
@@ -89,34 +97,71 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
                         echo "</form>";
                         echo "</div>";
                     }
-                    echo "<div class='d-flex flex-row justify-content-around mt-2'>";
+                    echo "<div class='d-flex flex-row justify-content-around mt-3'>";
                     echo "<form action='like.php' method='POST'>";
                     echo "<input type='hidden' name='id' value='$post_id'>";
-
-                    
-
                     echo "<input type='submit' name='like' class='btn btn-secondary me-2 like-button' value='Patinka'><span>".$likes = $newArray3['likes']."</span>";
                     echo "</form>";
-                    echo "<p>Komentarai: ".$comments = $newArray3['comments']."</p>";
+                    echo "<div><button class='btn btn-secondary me-2 comment-button'>Komentuoti</button><span>".$comments = $newArray3['comments']."</span></div>";
                     echo "</div>";
                     
-                    // $id = $newArray3['id'];
-                    // echo "<form action='irasymas_i_krepseli.php' method='POST'>
-                    // <input type='hidden' name='id' value='$id'>
-                    // <input type='number' min='0' name='kiekis' placeholder='Kiekis' required><br>
-                    // <input type='submit' name='prideti' value='Pridėti į krepšelį'>
-                    // </form>";
+                    
                     echo "</div>";
+                    echo "</div>";
+                    echo "<div class='card d-none'><div class='card-body d-flex flex-row'>
+                    <img class='me-3' style='width: 70px; height: 70px;' src='".$_SESSION['user']['picture']."'>
+                    <form class='flex-fill mb-0' action='comment.php' method='POST'>
+                    <textarea class='w-100' rows='3' name='content' placeholder='Ką pakomentuosite, ".$_SESSION['user']['username']."?' required></textarea>
+                    <input type='hidden' name='id' value='$post_id'>
+                    <input type='submit' class='btn btn-outline-secondary mt-2' value='Paskelbti'>
+                    <button type='button' class='btn btn-outline-secondary mt-2 close' onclick='this.parentElement.parentElement.parentElement.classList.add(`d-none`);'>Uždaryti</button>
+
+                    </form>
+                    </div></div>";
+
+                    // spausdinamos korteles su komentarais
+
+                    $commentssql = "SELECT comments.id, picture, username, content from users join comments where user_id = users.id && post_id = $post_id ORDER BY comments.id desc";
+                    $commentsres = mysqli_query($mysqli, $commentssql);
+                    
+                    while($commentsArray = mysqli_fetch_array($commentsres, MYSQLI_ASSOC)){
+                        echo "<div class='card'>";
+                        echo "<div class='card-body d-flex flex-column'>";
+                    
+                    echo "<div class='d-flex flex-row justify-content-between mb-2'>";
+                    echo "<h6>".$username = $commentsArray['username']."</h6>";
+                    // echo "<p>".$post_date = $newArray3['post_date']."</p>";
+                    echo "</div>";
+                    echo "<div class='d-flex flex-row'>";
+                    echo "<img style='width: 70px; height: 70px;' src='".$picture=$commentsArray['picture']."'>";
+                    echo "<p class='mx-3 w-100' name='content' style='line-break: anywhere;'>".$content = $commentsArray['content']."</p>";
+                    echo "</div>";
+                    if ($commentsArray['username']==$_SESSION['user']['username']){
+                        echo "<div class='d-flex justify-content-end'>";
+                        echo "<form action='delete-comment.php' method='POST'>";
+                        echo "<input type='hidden' name='id' value='".$commentsArray['id']."'>";
+                        echo "<input type='hidden' name='post_id' value='".$post_id."'>";
+                        echo "<input type='submit' name='delete' class='btn btn-outline-secondary' value='Ištrinti'>";
+                        echo "</form>";
+                        echo "</div>";
+                    }
+
+                    
+                    echo "</div>";
+                    echo "</div>";
+                    
+                    }
+
                     echo "</div>";
                 }
-                // echo "</tr>";
-                // echo "</table>";
+                
             }
             ?>
         </div>
     </div>
     <a href="#top" id="bottom" class="position-fixed bottom-0 end-0"><button class="btn btn-secondary bg-white text-secondary border border-secondary m-1">Į viršų</button></a>
     <script src="edit.js"></script>
+    <script src="comment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     
 </body>

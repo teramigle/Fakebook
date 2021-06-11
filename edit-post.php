@@ -6,7 +6,8 @@ if(empty($_COOKIE['user'])){
     $mysqli = mysqli_connect("localhost", "root", "", "fakebook");
     if(mysqli_connect_error()){
         $_SESSION['message']='Nepavyko prisijungti prie duomenų bazės';
-        header('Location: page.php');
+        
+        header('Location: logout.php');
     }else{
         $query = "UPDATE posts SET content = '".$_POST['content']."' WHERE id = '".$_POST['id']."';";
         $res = mysqli_query($mysqli, $query);

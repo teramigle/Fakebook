@@ -3,17 +3,11 @@ if(empty($_COOKIE['user'])){
     header('Location: logout.php');
 }
 session_start();
-if(@$_SESSION['message']){ //zinute apie nepavykusi prisijungima arba prisijungima prie duomenu bazes
+if(@$_SESSION['message']){ 
     echo '<div class="alert alert-warning alert-dismissible text-center position-fixed top-0 start-50 translate-middle-x fade show" role="alert" style="z-index:1000;">'.$_SESSION['message'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     
 }
-unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl jos neberodytu
-// $likedPosts = array();
-//                     array_push($likedPosts, $_SESSION['liked']);
-//                     var_dump($likedPosts);
-// echo "<a href='logout.php'><button>Atsijungti</button></a><br>";
-// echo 'Sveiki, '.$_SESSION['user']['username'].'!';
-// echo '<img src="'.$_SESSION['user']['picture'].'">';
+unset($_SESSION['message']); 
 
 ?>
 
@@ -27,31 +21,33 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="style-page.css">
     <link rel="icon" href="wojak.jpg">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-    
-    
 </head>
 <body>
 
-<div class="d-flex justify-content-between flex-row m-2 mb-3">
-    <a href='logout.php' id='top'><button class="btn btn-secondary" id="logout">Atsijungti</button></a>
-    <div id="search" class="input-group h-50 w-auto">
-        <input type="search" class="form-control rounded pe-0" placeholder="Vartotojas/įrašas" aria-label="Paieška"
-            aria-describedby="search-addon" />
-        <button type="button" class="btn btn-secondary">Ieškoti</button>
+    <div class="d-flex justify-content-between flex-row m-2 mb-3">
+        <a href='logout.php' id='top'><button class="btn btn-secondary" id="logout">Atsijungti</button></a>
+        <div id="search" class="input-group h-50 w-auto">
+            <input type="search" class="form-control rounded pe-0" placeholder="Vartotojas/įrašas" aria-label="Paieška"
+                aria-describedby="search-addon" />
+            <button type="button" class="btn btn-secondary">Ieškoti</button>
+        </div>
     </div>
-</div>
+    
+    <div class="d-flex justify-content-end">
+        <span id="tags-span">
+        
+        </span>
+    </div>
     <div class="row w-100 m-0">
         <div class="offset-1 col-10 offset-md-2 col-md-8">
             <div class="card ">
                 <div class="card-body d-flex flex-row">
-            
                     <img class="me-3" src="<?php echo $_SESSION['user']['picture'];?>">
-                    <form class="flex-fill" method="POST" action="post.php">
+                    <form class="flex-fill" method="POST" action="post.php" enctype="multipart/form-data">
                         <textarea class="w-100 p-1 mb-2" rows="3" name="content" placeholder="Ką pasakysite, <?php echo $_SESSION['user']['username'];?>?" required></textarea>
-                        <input class="btn btn-outline-secondary" type="submit" name="post" value="Paskelbti">
+                        <input type="file" class="w-100 d-block mb-2" id="fileToUpload" name="fileToUpload" accept="image/png, image/jpeg">
+                        <input class="btn btn-outline-secondary" type="submit" name="submit" value="Paskelbti">
+                        
                     </form>
                 </div>
             </div>
@@ -60,30 +56,34 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
             $mysqli = mysqli_connect('localhost', 'root', '', 'fakebook');
             if(mysqli_connect_error()){
                 $_SESSION['message']='Nepavyko prisijungti prie duomenų bazės';
-                header('Location: page.php');
+                header('Location: logout.php');
             }else{
-                $sql = "SELECT posts.id, picture, username, post_date, content, likes, comments FROM posts JOIN users WHERE users.id = posts.user_id ORDER BY posts.id DESC";
+                $sql = "SELECT posts.id, picture, username, post_date, content, likes, comments, `image` FROM posts JOIN users WHERE users.id = posts.user_id ORDER BY posts.id DESC";
                 $res = mysqli_query($mysqli, $sql);
 
-                // echo "<table>";
-                // echo "<tr>";
-                while($newArray3 = mysqli_fetch_array($res, MYSQLI_ASSOC)){
-                    $post_id = $newArray3['id'];
+                while($postsArray = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+                    $post_id = $postsArray['id'];
+                    // var_dump($postsArray);
                     echo "<div class='post'>";
-                    echo "<div class='card mt-3' id=".$post_id.">";
+                    echo "<div class='card post-card mt-3' id=".$post_id.">";
                     echo "<div class='card-body d-flex flex-column'>";
                     
                     echo "<div class='d-flex flex-row justify-content-between'>";
-                    echo "<h5>".$username = $newArray3['username']."</h5>";
-                    echo "<p class='text-end'>".$post_date = $newArray3['post_date']."</p>";
+                    echo "<h5 class='username'>".$username = $postsArray['username']."</h5>";
+                    echo "<p class='text-end'>".$post_date = $postsArray['post_date']."</p>";
                     echo "</div>";
                     echo "<div class='d-flex flex-row mb-2'>";
-                    echo "<img src='".$picture=$newArray3['picture']."'>";
-                    echo "<p class='mx-3 w-100' name='content' rows='5' style='line-break: anywhere;'>".$content = $newArray3['content']."</p>";
+                    echo "<img src='".$picture=$postsArray['picture']."'>";
+                    echo "<p class='mx-3 w-100 content' name='content' rows='5' style='line-break: anywhere;'>".$content = $postsArray['content']."</p>";
                     echo "<input type='hidden' name='id' value='$post_id'>";
                     echo "</div>";
+                    if($postsArray['image']!=''){
+                    echo "<div class = 'd-flex justify-content-center mb-2'>";
+                    echo "<img class='image' style=' border-radius: 0!important;' src='".$image=$postsArray['image']."'>";
+                    echo "</div>";
+                    }
                     
-                    if ($newArray3['username']==$_SESSION['user']['username']){
+                    if ($postsArray['username']==$_SESSION['user']['username']){
                         echo "<div class='d-flex flex-row justify-content-end'>";
                         // echo "<form action='edit-post.php' method='POST'>";
                         echo "<div>";
@@ -100,9 +100,9 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
                     echo "<div class='d-flex flex-row justify-content-around mt-3'>";
                     echo "<form action='like.php' method='POST'>";
                     echo "<input type='hidden' name='id' value='$post_id'>";
-                    echo "<input type='submit' name='like' class='btn btn-secondary me-2 like-button' value='Patinka'><span>".$likes = $newArray3['likes']."</span>";
+                    echo "<input type='submit' name='like' class='btn btn-secondary me-2 like-button' value='Patinka'><span>".$likes = $postsArray['likes']."</span>";
                     echo "</form>";
-                    echo "<div><button class='btn btn-secondary me-2 comment-button'>Komentuoti</button><span>".$comments = $newArray3['comments']."</span></div>";
+                    echo "<div><button class='btn btn-secondary me-2 comment-button'>Komentuoti</button><span>".$comments = $postsArray['comments']."</span></div>";
                     echo "</div>";
                     
                     
@@ -162,6 +162,7 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
     <a href="#top" id="bottom" class="position-fixed bottom-0 end-0"><button class="btn btn-secondary bg-white text-secondary border border-secondary m-1">Į viršų</button></a>
     <script src="edit.js"></script>
     <script src="comment.js"></script>
+    <script src="search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     
 </body>

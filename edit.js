@@ -39,7 +39,15 @@ document.querySelectorAll('.edit-button').forEach(item => {
     // set element as child of wrapper
     form.appendChild(content);
     form.appendChild(input);
-    content.outerHTML = content.outerHTML.replace(/p/g,"textarea");
+    // content.outerHTML = content.outerHTML.replace(/p/g,"textarea");
+    let textarea = document.createElement('textarea');
+    textarea.innerHTML = content.innerHTML;
+    content.parentNode.replaceChild(textarea, content);
+    textarea.classList.add('mx-3');
+    textarea.classList.add('w-100');
+    textarea.setAttribute('name', 'content');
+    textarea.setAttribute('rows', '5');
+    textarea.setAttribute('style', 'line-break:anywhere;');
     // content.setAttribute('rows', '10');
 
 

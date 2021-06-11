@@ -22,8 +22,8 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
     <link rel="icon" href="wojak.jpg">
 </head>
 <body>
-    <div class="row h-100 w-100 align-items-center justify-content-center">
-        <div class="col-md-6 px-5 py-2">
+    <div class="row h-100 w-100 mx-0 align-items-center justify-content-center">
+        <div class="col-md-6 px-3 px-md-5 py-2">
             <h1 class="text-center text-decoration-underline header">Fakebook</h1>
             <h3 class="text-center sub-header">Let's fake it!</h3>
         </div>
@@ -37,13 +37,6 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
                         <input class="d-block p-1 m-1" type="text" name="username" placeholder="Vartotojo vardas" required>
                         <input class="d-block p-1 m-1" type="password" name="password" placeholder="Slaptažodis" required>
                         <input class="btn btn-outline-secondary m-1" type="submit" name="submit" value="Prisijungti">
-                        <!-- <?php
-                            if(@$_SESSION['message']){ //zinute apie nepavykusi prisijungima arba prisijungima prie duomenu bazes
-                                echo '<p>'.$_SESSION['message'].'</p>';
-                                
-                            }
-                            unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl jos neberodytu
-                        ?> -->
                     </form>
                 </div>
             </div>

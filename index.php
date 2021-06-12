@@ -18,8 +18,10 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fakebook</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="wojak.jpg">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" href="images/wojak.jpg">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="row h-100 w-100 mx-0 align-items-center justify-content-center">
@@ -33,7 +35,7 @@ unset($_SESSION['message']); //panaikiname zinute is masyvo, kad perkrovus psl j
                     <h5 class="mb-0 p-1">Prisijungimas</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="login.php">
+                    <form method="POST" action="php/login.php">
                         <input class="d-block p-1 m-1" type="text" name="username" placeholder="Vartotojo vardas" required>
                         <input class="d-block p-1 m-1" type="password" name="password" placeholder="Slaptažodis" required>
                         <input class="btn btn-outline-secondary m-1" type="submit" name="submit" value="Prisijungti">

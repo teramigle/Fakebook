@@ -8,8 +8,6 @@ if(mysqli_connect_error()) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $password = md5($password);
-    echo $password;
-    
     $checkUser = mysqli_query($connect, "SELECT * FROM users WHERE username = '$username' && `password` = '$password'");
     
     if(mysqli_num_rows($checkUser)>0){ //jei yra db vartotojas tokiu vardu  ir slaptazodziu

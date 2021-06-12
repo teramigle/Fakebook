@@ -10,7 +10,7 @@ Esami vartotojai:
 * Vartotojo vardas SomeBeans, slaptažodis aaaa1111
 * Vartotojo vardas Munchkin, slaptažodis mmmm1111
 
-Prisijungę matysite visus sistemoje esančius įrašus, galėsite juos pamėgti ir pakomentuoti, kurti naujus įrašus, pasidalindami tekstu ir nuotrauka, taip pat regaduoti ir ištrinti savo įrašus. Sistemoje yra galimybė ieškoti įrašų pagal vartotojo vardą ar įrašo turinį.
+Prisijungę matysite visus sistemoje esančius įrašus, galėsite juos pamėgti ir pakomentuoti, kurti naujus įrašus, pasidalindami tekstu ir nuotrauka, taip pat redaguoti ir ištrinti savo įrašus. Sistemoje yra galimybė ieškoti įrašų pagal vartotojo vardą ar įrašo turinį.
 
 ### Reikalavimai
 

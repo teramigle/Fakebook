@@ -15,6 +15,9 @@ if(empty($_COOKIE['user'])){
 
         $sql2 = "delete from comments where post_id=".$post_id.";";
         mysqli_query($mysqli, $sql2);
+        
+        $sql3 = "delete from likes where post_id=".$post_id.";";
+        mysqli_query($mysqli, $sql3);
 
         $_SESSION['message'] = 'Įrašas ištrintas';
         header('Location: ../page.php');

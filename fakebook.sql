@@ -117,7 +117,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `picture`) VALUES
 (1, 'BigDaddy', 'e19d5cd5af0378da05f63f891c7467af', 'pictures/bigdaddy.jpg'),
-(2, 'SomeBeans', '943811a65c02a2b0563d2d997b83d016', 'pictures/somebeans.jpg'),
+(2, 'SomeBeans', '9a84ee41aa72de59c63006aad670bcce', 'pictures/somebeans.jpg'),
 (3, 'Munchkin', '4d9abe59d789a38f39985e1a0511a33b', 'pictures/munchkin.jpg');
 
 --

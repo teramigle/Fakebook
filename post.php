@@ -1,8 +1,9 @@
 <?php
-if(empty($_COOKIE['user'])){
-    header('Location: logout.php');
+session_start();
+if(empty($_SESSION['user'])){
+    header('Location: php/logout.php');
 }else{
-    session_start();
+    
     $mysqli = mysqli_connect("localhost", "root", "", "fakebook");
     if(mysqli_connect_error()){
         $_SESSION['message']='Nepavyko prisijungti prie duomenų bazės';

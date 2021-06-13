@@ -1,8 +1,9 @@
 <?php
-if(empty($_COOKIE['user'])){
+session_start();
+if(empty($_SESSION['user'])){
     header('Location: php/logout.php');
 }
-session_start();
+
 if(@$_SESSION['message']){ 
     echo '<div class="alert alert-warning alert-dismissible text-center position-fixed top-0 start-50 translate-middle-x fade show" role="alert" style="z-index:1000;">'.$_SESSION['message'].'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     

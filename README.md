@@ -4,7 +4,7 @@ Socialinio tinklo sistema, skirta dalintis informacija. Vartotojams, besinaudoja
 
 ## Paleidimas ir naudojimas
 
-Norėdami sistemą paleisti lokaliai per XAMPP, parsisiųskite kodą (Github - Code - Download ZIP), išskleiskite ir Fakebook-main aplanką patalpinkite xampp/htdocs aplanke. Per XAMPP Control Panel įjunkite (start) Apache ir MySQL serverius. Naudodami phpMyAdmin įrankį (XAMPP Control Panel - MySQL - Admin arba http://localhost/phpmyadmin/), sukurkite duomenų bazę (New) pavadinimu **fakebook** ir į ją įkelkite (Import) fakebook.sql failą iš Fakebook-main aplanko. Sistemą pasieksite per naršyklę adresu http://localhost/Fakebook-main
+Norėdami sistemą paleisti lokaliai naudodamiesi XAMPP, parsisiųskite kodą (Github - Code - Download ZIP), išskleiskite ir Fakebook-main aplanką patalpinkite xampp/htdocs aplanke. Per XAMPP Control Panel įjunkite (Start) Apache ir MySQL serverius. Naudodami phpMyAdmin įrankį (XAMPP Control Panel - MySQL - Admin arba http://localhost/phpmyadmin/), sukurkite duomenų bazę (New) pavadinimu **fakebook** ir į ją įkelkite (Import) fakebook.sql failą iš Fakebook-main aplanko. Sistemą pasieksite per naršyklę adresu http://localhost/Fakebook-main
 
 Esami vartotojai:
 * Vartotojo vardas BigDaddy, slaptažodis abcd1234

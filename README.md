@@ -32,4 +32,4 @@ Kodo versijavimui naudotas [Github](https://github.com/). Visą kodą galite ras
 
 ### Autoriai
 
-Sistemą sukūrė Vilniaus technologijų mokymo centro Žiniatinklio programuotojo mokymo programos mokinė Miglė Jakubkaitė.
+Sistemą sukūrė Vilniaus technologijų mokymo centro Žiniatinklio programuotojo mokymo programos ŽP-20/4 grupės mokinė Miglė Jakubkaitė.

@@ -5,11 +5,11 @@ Socialinio tinklo sistema, skirta dalintis informacija. Vartotojams, besinaudoja
 ## Paleidimas ir naudojimas
 
 Norėdami sistemą paleisti lokaliai naudodamiesi XAMPP:
-1. Parsisiųskite kodą (**Github - Code - Download ZIP** arba, jei turite Git, konsolėje įveskite komandą **git clone https://github.com/teramigle/Fakebook.git**, tuomet aplankas vadinsis tiesiog Fakebook), išskleiskite ZIP failą
-2. Fakebook-main (Fakebook) aplanką patalpinkite **xampp/htdocs** aplanke
+1. Parsisiųskite kodą (**Github - Code - Download ZIP - išskleiskite ZIP failą**, gausite aplanką Fakebook-main, arba, jei turite Git, konsolėje įveskite komandą **git clone https://github.com/teramigle/Fakebook.git**, tuomet gausite aplanką Fakebook)
+2. Fakebook-main (arba Fakebook) aplanką patalpinkite **xampp/htdocs** aplanke
 3. Per XAMPP Control Panel įjunkite (**Start**) Apache ir MySQL serverius
-4. Naudodami phpMyAdmin įrankį (**XAMPP Control Panel - MySQL - Admin** arba **http://localhost/phpmyadmin/**), sukurkite duomenų bazę (**New**) pavadinimu **fakebook** ir į ją įkelkite (**Import**) fakebook.sql failą iš Fakebook-main (Fakebook) aplanko
-5. Sistemą pasieksite per naršyklę adresu **http://localhost/Fakebook-main** (**http://localhost/Fakebook**)
+4. Naudodami phpMyAdmin įrankį (**XAMPP Control Panel - MySQL - Admin** arba **http://localhost/phpmyadmin/**), sukurkite duomenų bazę (**New**) pavadinimu **fakebook** ir į ją įkelkite (**Import**) fakebook.sql failą iš Fakebook-main (arba Fakebook) aplanko
+5. Sistemą pasieksite per naršyklę adresu **http://localhost/Fakebook-main** (arba **http://localhost/Fakebook**)
 
 Esami vartotojai:
 * Vartotojo vardas BigDaddy, slaptažodis abcd1234

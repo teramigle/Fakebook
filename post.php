@@ -24,6 +24,7 @@ if(empty($_SESSION['user'])){
                 $uploadOk = 0;
             }
         } else {
+            date_default_timezone_set('EET');
             $query = "INSERT INTO posts values('','".$_SESSION['user']['id']."', '".$_POST['content']."', '', '".date("Y-m-d H:i:s")."', '', '');";
             $res = mysqli_query($mysqli, $query);
             $_SESSION['message']='Įrašas paskelbtas';

@@ -37,6 +37,7 @@ if(empty($_SESSION['user'])){
           } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                 $image = $_FILES["fileToUpload"]["name"];
+                date_default_timezone_set('EET');
                 $query = "INSERT INTO posts values('','".$_SESSION['user']['id']."', '".$_POST['content']."', 'uploads/".$image."', '".date("Y-m-d H:i:s")."', '', '');";
                 echo $query;
                 $res = mysqli_query($mysqli, $query);
